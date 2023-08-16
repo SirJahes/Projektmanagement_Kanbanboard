@@ -2,7 +2,7 @@
 
 .board-columns {
     display: flex;
-    margin: 0 $gap $gap;
+    margin: 0 $gap $gap 0;
     overflow-x: auto;
 
     &::-webkit-scrollbar {
@@ -17,5 +17,11 @@
     &::-webkit-scrollbar-thumb {
       background-color: rgba(255, 255, 255, 0.46);
       border-radius: 5px solid $list-bg-color;
+    }
+
+    .column-drop-preview {
+      background-color: rgba(150, 150, 200, 0.1);
+      border: 1px dashed #abc;
+      margin: 5px 45px 5px 5px;
     }
   }
