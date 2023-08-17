@@ -117,8 +117,7 @@ const onUpdateColumn = (newColumn) => {
             animationDuration: 150,
             showOnTop: true,
             className: "column-drop-preview",
-          }}
-        >
+          }}>
           {columns &&
             columns.length > 0 &&
             columns.map((column, index) => {
@@ -131,7 +130,8 @@ const onUpdateColumn = (newColumn) => {
                 </Draggable>
               )
             })}
-
+        </Container>
+        
             {isShowAddList === false ?
               <div className="add-new-column" onClick={() => setIsShowAddList(true)}>
                   <i className="fa fa-plus icon"></i>  Add another column
@@ -153,7 +153,7 @@ const onUpdateColumn = (newColumn) => {
                 </div>
               </div>
             }
-        </Container>
+
       </div>
     </>
   );
