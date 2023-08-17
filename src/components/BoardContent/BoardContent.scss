@@ -41,4 +41,24 @@
         background-color: hsla(0, 0, 100, .34);
       }
     }
+
+    .content-add-column {
+      padding: 5px;
+      margin-left: 10px;
+
+      background-color: hsla(0, 0, 100, .34);
+
+      .group-btn {
+        display: flex;
+        padding-top: 10px;
+        align-items: center;
+
+        i {
+          font-size: 30px;
+          padding-left: 10px;
+          cursor: pointer;
+        }
+      }
+
+    }
   }

@@ -11,6 +11,8 @@ const BoardContent = () => {
   const [board, setBoard] = useState({});
   const [columns, setColumns] = useState([]);
 
+  const [isShowAddList, setIsShowAddList] = useState(false);
+
   useEffect(() => {
     const boardIniData = initData.boards.find((item) => item.id === "board-1");
     if (boardIniData) {
@@ -84,9 +86,20 @@ const BoardContent = () => {
               );
             })}
 
-            <div className="add-new-column">
-              <i className="fa fa-plus icon"></i>  Add another column
-            </div>
+            {!isShowAddList === false ?
+              <div className="add-new-column" onClick={() => setIsShowAddList(true)}>
+                  <i className="fa fa-plus icon"></i>  Add another column
+              </div>
+              :
+              <div className="content-add-column">
+                <input type='text' className="form-control" />
+                <div className="group-btn">
+                  <button className="btn btn-success" 
+                    onClick={() => setIsShowAddList(true)}>Add list</button>
+                  <i className="fa fa-times icon" onClick={() => setIsShowAddList(false)}></i>
+                </div>
+              </div>
+            }
         </Container>
       </div>
     </>
