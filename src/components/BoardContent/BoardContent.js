@@ -1,15 +1,26 @@
 import "./BoardContent.scss";
 import Column from "../Column/Column";
 import { initData } from "../../actions/initData";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import _ from "lodash";
 import { mapOrder } from "../../utilities/sorts";
 import { Container, Draggable } from "react-smooth-dnd";
 import { applyDrag } from "../../utilities/dragdrop";
+import { v4 as uuidv4 } from "uuid";
 
 const BoardContent = () => {
   const [board, setBoard] = useState({});
   const [columns, setColumns] = useState([]);
+
+  const [isShowAddList, setIsShowAddList] = useState(false);
+  const inputRef = useRef(null);
+  const [valueInput, setValueInput] = useState("");
+
+  useEffect(() => {
+    if (isShowAddList === true && inputRef && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isShowAddList])
 
   useEffect(() => {
     const boardIniData = initData.boards.find((item) => item.id === "board-1");
@@ -58,6 +69,29 @@ const BoardContent = () => {
     );
   }
 
+const handleAddList = () => {
+  if (!valueInput) {
+    if (inputRef && inputRef.current)
+        inputRef.current.focus();
+      return;
+  }
+
+  //update board columns
+  const _columns = _.cloneDeep(columns);
+  _columns.push({
+    id: uuidv4(),
+    boardId: board.id,
+    title : valueInput,
+    cards: [],
+
+  });
+  setColumns(_columns);
+  setValueInput("")
+  inputRef.current.focus();
+
+}
+
+
   return (
     <>
       <div className="board-columns">
@@ -81,12 +115,30 @@ const BoardContent = () => {
                   column={column}
                   onCardDrop={onCardDrop} />
                 </Draggable>
-              );
+              )
             })}
 
-            <div className="add-new-column">
-              <i className="fa fa-plus icon"></i>  Add another column
-            </div>
+            {isShowAddList === false ?
+              <div className="add-new-column" onClick={() => setIsShowAddList(true)}>
+                  <i className="fa fa-plus icon"></i>  Add another column
+              </div>
+              :
+              <div className="content-add-column">
+                <input 
+                  type='text' 
+                  className="form-control" 
+                  ref={inputRef}
+                  value={valueInput}
+                  onChange={(event) => setValueInput(event.target.value)} 
+                />
+                <div className="group-btn">
+                  <button className="btn btn-success" 
+                    onClick={() => handleAddList()}
+                    >Add list</button>
+                    <i className="fa fa-times icon" onClick={() => setIsShowAddList(false)}></i>
+                </div>
+              </div>
+            }
         </Container>
       </div>
     </>
