@@ -91,6 +91,19 @@ const handleAddList = () => {
 
 }
 
+const onUpdateColumn = (newColumn) => {
+  const columnIdUpdate = newColumn.id;
+  let ncols = [...columns];
+  let index = ncols.findIndex(item => item.id === columnIdUpdate);
+  if(newColumn._destroy){
+    //remove column
+    ncols.splice(index, 1);
+  }else {
+    //update title
+    ncols[index] = newColumn;
+  }
+  setColumns(ncols);
+}
 
   return (
     <>
@@ -113,7 +126,8 @@ const handleAddList = () => {
                 <Draggable key={column.id}>
                   <Column 
                   column={column}
-                  onCardDrop={onCardDrop} />
+                  onCardDrop={onCardDrop}
+                  onUpdateColumn={onUpdateColumn} />
                 </Draggable>
               )
             })}
