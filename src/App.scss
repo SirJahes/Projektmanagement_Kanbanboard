@@ -36,4 +36,18 @@ body {
 
     background-color: inherit;
   }
+
+  .customize-input-card {
+    border: none;
+    cursor: pointer;
+
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
+      background-color: white;
+      cursor: text;
+    }
+
+    background-color: inherit;
+  }
 }

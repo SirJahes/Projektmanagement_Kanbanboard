@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Card.scss";
 import ConfirmModalCards from "../Common/ConfirmModalCards";
 import ConfirmModalImage from "../Common/ConfirmModalImage";
@@ -8,9 +8,18 @@ import { MODAL_ACTION_CLOSE, MODAL_ACTION_CONFIRM } from '../../utilities/consta
 const Card = (props) => {
   const { card, onDeleteCard, onUpdateCard } = props;
   const [isHovered, setIsHovered] = useState(false);
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [newTitle, setNewTitle] = useState(card.title);
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
-  const [showUploadModal, setShowUploadModal] = useState(false); // Zustand für das Bild-Uploadmodal
+  const [showUploadModal, setShowUploadModal] = useState(false);
+
+  useEffect(() => {
+    if (card && card.title) {
+      setNewTitle(card.title)
+    }
+  }, [card, card.title])
 
   const toggleHover = () => {
     setIsHovered(!isHovered);
@@ -25,6 +34,21 @@ const Card = (props) => {
       setShowImageModal(true);
     } else {
       setShowUploadModal(true);
+    }
+  };
+
+  const handleTitleChange = (event) => {
+    setNewTitle(event.target.value);
+  };
+
+  const handleTitleBlur = () => {
+    setIsEditingTitle(false);
+    if (newTitle !== card.title) {
+      const updatedCard = {
+        ...card,
+        title: newTitle
+      };
+      onUpdateCard(updatedCard);
     }
   };
 
@@ -88,7 +112,21 @@ const Card = (props) => {
             ></i>
           )
         )}
-        {card.title}
+        {isEditingTitle ? (
+          <input
+            type="text"
+            className="customize-input-card"
+            value={newTitle}
+            onChange={handleTitleChange}
+            onBlur={handleTitleBlur}
+            spellCheck="false"
+            autoFocus
+          />
+        ) : (
+          <div className="card-title" onClick={() => setIsEditingTitle(true)}>
+            {card.title}
+          </div>
+        )}
         {isHovered && (
           <i
             className="fa fa-trash card-delete-icon"
