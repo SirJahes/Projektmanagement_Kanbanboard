@@ -23,16 +23,40 @@
       &:hover {
         background-color: rgb(185, 185, 185);
       }
+      .card-upload-icon {
+        position: absolute; /* Add position absolute for icon placement */
+        bottom: 12px;
+        right: 30px;
+        cursor: pointer;
 
+        &:hover {
+          color: red;
+        }
+      }
+      .card-delete-image-icon {
+        position: absolute; /* Add position absolute for icon placement */
+        top: 3px;
+        right: 3px;
+        padding: 10px;
+        background-color: rgb(185, 185, 185);
+        border-radius: $card-border-radius;
+        cursor: pointer;
+
+        &:hover {
+          color: red;
+          background-color: white;
+          
+        }
+      }
       .card-delete-icon {
         position: absolute; /* Add position absolute for icon placement */
         bottom: 12px;
         right: 10px;
         cursor: pointer;
-      }
-      
-      .card-delete-icon:hover {
-        color: red;
+
+        &:hover {
+          color: red;
+        }
       }
 
     }

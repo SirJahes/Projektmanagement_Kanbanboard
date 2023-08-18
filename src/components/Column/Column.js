@@ -24,6 +24,13 @@ const Column = (props) => {
   const [valueTextArea, setvalueTextArea ] = useState("");
   const textAreaRef = useRef(null);
 
+  const onUpdateCard = (updatedCard) => {
+    const updatedCards = cards.map((c) =>
+      c.id === updatedCard.id ? updatedCard : c
+    );
+    onUpdateColumn({ ...column, cards: updatedCards });
+  };
+
   const handleDeleteCard = (cardId) => {
     // Finde die Karte, die gelöscht werden soll
     const cardToDelete = cards.find((card) => card.id === cardId);
@@ -122,6 +129,7 @@ const Column = (props) => {
     setvalueTextArea("");
     setisShowAddNewCard(false);
   }
+
   return (
     <>
       <div className="column">
@@ -172,7 +180,7 @@ const Column = (props) => {
               cards.map((card, index) => {
                 return (
                   <Draggable key={card.id}>
-                    <Card card={card} onDeleteCard={handleDeleteCard}/>
+                    <Card card={card} onDeleteCard={handleDeleteCard} onUpdateCard={onUpdateCard}/>
                   </Draggable>
                 )
               })}

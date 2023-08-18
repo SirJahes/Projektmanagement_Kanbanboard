@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./Card.scss";
 import ConfirmModalCards from "../Common/ConfirmModalCards";
-import { MODAL_ACTION_CLOSE, MODAL_ACTION_CONFIRM } from '../../utilities/constant'; // Stelle sicher, dass du die richtigen Importpfade verwendest
+import ConfirmModalImage from "../Common/ConfirmModalImage"; // Importiere das Bild-Löschmodal
+import { MODAL_ACTION_CLOSE, MODAL_ACTION_CONFIRM } from '../../utilities/constant';
 
 const Card = (props) => {
-  const { card, onDeleteCard } = props;
+  const { card, onDeleteCard, onUpdateCard } = props;
   const [isHovered, setIsHovered] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showImageModal, setShowImageModal] = useState(false); // Zustand für das Bild-Löschmodal
 
   const toggleHover = () => {
     setIsHovered(!isHovered);
@@ -16,13 +18,33 @@ const Card = (props) => {
     setShowDeleteModal(true);
   };
 
+  const handleImageClick = () => {
+    if (card.image) {
+      setShowImageModal(true); // Zeige das Bild-Löschmodal an, wenn ein Bild vorhanden ist
+    } else {
+      // Implementiere die Logik zum Hochladen eines Bildes
+      // Zeige ein Bild-Upload-Modal oder ähnliches an
+    }
+  };
+
   const handleonModalAction = (type) => {
     if (type === MODAL_ACTION_CLOSE) {
-      setShowDeleteModal(false); // Schließe das Löschmodal
+      setShowDeleteModal(false);
+      setShowImageModal(false);
     }
     if (type === MODAL_ACTION_CONFIRM) {
-      onDeleteCard(card.id); // Lösche die Karte
-      setShowDeleteModal(false); // Schließe das Löschmodal
+      if (showImageModal) {
+        // Lösche das Bild
+        const updatedCard = {
+          ...card,
+          image: null
+        };
+        onUpdateCard(updatedCard); // Rufe die onUpdateCard-Funktion auf
+      } else {
+        onDeleteCard(card.id); // Lösche die Karte
+      }
+      setShowDeleteModal(false);
+      setShowImageModal(false);
     }
   };
 
@@ -33,13 +55,28 @@ const Card = (props) => {
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
       >
-        {card.image && (
-          <img
-            className="card-cover"
-            src={card.image}
-            alt=""
-            onMouseDown={(event) => event.preventDefault()}
-          />
+        {card.image ? (
+          <div className="card-image">
+            <img
+              className="card-cover"
+              src={card.image}
+              alt=""
+              onMouseDown={(event) => event.preventDefault()}
+            />
+            {isHovered && (
+              <i
+                className="fa fa-times card-delete-image-icon"
+                onClick={handleImageClick}
+              ></i>
+            )}
+          </div>
+        ) : (
+          isHovered && (
+            <i
+              className="fa fa-upload card-upload-icon"
+              onClick={handleImageClick} // Hier sollte die Logik zum Bild-Upload erfolgen
+            ></i>
+          )
         )}
         {card.title}
         {isHovered && (
@@ -53,7 +90,13 @@ const Card = (props) => {
         show={showDeleteModal}
         title={"Remove a card"}
         content={`Are you sure to remove this card: <b>${card.title}</b>`}
-        onAction={handleonModalAction} // Nutze die aktualisierte Funktion
+        onAction={handleonModalAction}
+      />
+      <ConfirmModalImage
+        show={showImageModal}
+        title={"Remove Image"}
+        content={"Are you sure you want to remove this image?"}
+        onAction={handleonModalAction}
       />
     </>
   );
