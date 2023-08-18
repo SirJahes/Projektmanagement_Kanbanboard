@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import "./Card.scss";
 import ConfirmModalCards from "../Common/ConfirmModalCards";
-import ConfirmModalImage from "../Common/ConfirmModalImage"; // Importiere das Bild-Löschmodal
+import ConfirmModalImage from "../Common/ConfirmModalImage";
+import ImageUploadModal from "../Common/ImageUploadModal";
 import { MODAL_ACTION_CLOSE, MODAL_ACTION_CONFIRM } from '../../utilities/constant';
 
 const Card = (props) => {
   const { card, onDeleteCard, onUpdateCard } = props;
   const [isHovered, setIsHovered] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showImageModal, setShowImageModal] = useState(false); // Zustand für das Bild-Löschmodal
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [showUploadModal, setShowUploadModal] = useState(false); // Zustand für das Bild-Uploadmodal
 
   const toggleHover = () => {
     setIsHovered(!isHovered);
@@ -20,28 +22,36 @@ const Card = (props) => {
 
   const handleImageClick = () => {
     if (card.image) {
-      setShowImageModal(true); // Zeige das Bild-Löschmodal an, wenn ein Bild vorhanden ist
+      setShowImageModal(true);
     } else {
-      // Implementiere die Logik zum Hochladen eines Bildes
-      // Zeige ein Bild-Upload-Modal oder ähnliches an
+      setShowUploadModal(true);
     }
+  };
+
+  const handleImageUpload = (imageFile) => {
+    const updatedCard = {
+      ...card,
+      image: URL.createObjectURL(imageFile)
+    };
+    onUpdateCard(updatedCard);
+    setShowUploadModal(false);
   };
 
   const handleonModalAction = (type) => {
     if (type === MODAL_ACTION_CLOSE) {
       setShowDeleteModal(false);
       setShowImageModal(false);
+      setShowUploadModal(false);
     }
     if (type === MODAL_ACTION_CONFIRM) {
       if (showImageModal) {
-        // Lösche das Bild
         const updatedCard = {
           ...card,
           image: null
         };
-        onUpdateCard(updatedCard); // Rufe die onUpdateCard-Funktion auf
+        onUpdateCard(updatedCard);
       } else {
-        onDeleteCard(card.id); // Lösche die Karte
+        onDeleteCard(card.id);
       }
       setShowDeleteModal(false);
       setShowImageModal(false);
@@ -74,7 +84,7 @@ const Card = (props) => {
           isHovered && (
             <i
               className="fa fa-upload card-upload-icon"
-              onClick={handleImageClick} // Hier sollte die Logik zum Bild-Upload erfolgen
+              onClick={handleImageClick}
             ></i>
           )
         )}
@@ -97,6 +107,11 @@ const Card = (props) => {
         title={"Remove Image"}
         content={"Are you sure you want to remove this image?"}
         onAction={handleonModalAction}
+      />
+      <ImageUploadModal
+        show={showUploadModal}
+        onClose={() => setShowUploadModal(false)}
+        onImageUpload={handleImageUpload}
       />
     </>
   );
