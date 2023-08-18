@@ -1,6 +1,7 @@
 @import '../../settings';
 
     div.card-item {
+      position: relative;
       background-color: white;
       padding: $gap;
       border-radius: $card-border-radius;
@@ -18,4 +19,20 @@
         border-top-left-radius: $card-border-radius;
         border-top-right-radius: $card-border-radius;
       }
+
+      &:hover {
+        background-color: rgb(185, 185, 185);
+      }
+
+      .card-delete-icon {
+        position: absolute; /* Add position absolute for icon placement */
+        bottom: 12px;
+        right: 10px;
+        cursor: pointer;
+      }
+      
+      .card-delete-icon:hover {
+        color: red;
+      }
+
     }

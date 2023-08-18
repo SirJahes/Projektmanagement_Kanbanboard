@@ -24,6 +24,29 @@ const Column = (props) => {
   const [valueTextArea, setvalueTextArea ] = useState("");
   const textAreaRef = useRef(null);
 
+  const handleDeleteCard = (cardId) => {
+    // Finde die Karte, die gelöscht werden soll
+    const cardToDelete = cards.find((card) => card.id === cardId);
+  
+    if (!cardToDelete) {
+      return; // Karte nicht gefunden, abbrechen
+    }
+  
+    // Erstelle eine kopie der aktuellen Spalte
+    const updatedColumn = { ...column };
+  
+    // Entferne die Karte aus der Spalte
+    updatedColumn.cards = updatedColumn.cards.filter(
+      (card) => card.id !== cardId
+    );
+  
+    // Aktualisiere die Kartenreihenfolge
+    updatedColumn.cardOrder = updatedColumn.cards.map((card) => card.id);
+  
+    // Rufe onUpdateColumn auf, um die aktualisierte Spalte zu speichern
+    onUpdateColumn(updatedColumn);
+  };
+
   useEffect(() => {
     if(isShowAddNewCard === true && textAreaRef && textAreaRef.current){
       textAreaRef.current.focus();
@@ -124,9 +147,8 @@ const Column = (props) => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Add card</Dropdown.Item>
+                <Dropdown.Item onClick={() => setisShowAddNewCard(true)}>Add card</Dropdown.Item>
                 <Dropdown.Item onClick={toggleModal}>Remove this column</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
               </Dropdown.Menu>
           </Dropdown>
           </div>
@@ -150,7 +172,7 @@ const Column = (props) => {
               cards.map((card, index) => {
                 return (
                   <Draggable key={card.id}>
-                    <Card card={card} />
+                    <Card card={card} onDeleteCard={handleDeleteCard}/>
                   </Draggable>
                 )
               })}
