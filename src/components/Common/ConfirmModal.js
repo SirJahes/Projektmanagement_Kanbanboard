@@ -23,10 +23,10 @@ const ConfirmModal = (props) => {
       <Modal.Body>{parse(content)}</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
-          Close
+          Abbrechen
         </Button>
         <Button variant="danger" onClick={handleConfirm}>
-          Confirm
+          Löschen
         </Button>
       </Modal.Footer>
     </Modal>

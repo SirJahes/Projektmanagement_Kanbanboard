@@ -136,14 +136,14 @@ const Card = (props) => {
       </div>
       <ConfirmModalCards
         show={showDeleteModal}
-        title={"Remove a card"}
-        content={`Are you sure to remove this card: <b>${card.title}</b>`}
+        title={"Karte löschen"}
+        content={`Möchtest du die Karte <b>${card.title}</b> löschen?`}
         onAction={handleonModalAction}
       />
       <ConfirmModalImage
         show={showImageModal}
-        title={"Remove Image"}
-        content={"Are you sure you want to remove this image?"}
+        title={"Bild löschen"}
+        content={"Möchtest du dieses Bild wirklich löschen?"}
         onAction={handleonModalAction}
       />
       <ImageUploadModal

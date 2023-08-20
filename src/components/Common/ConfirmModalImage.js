@@ -24,10 +24,10 @@ const ConfirmModalImage = (props) => {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleCloseImage}>
-          Cancel
+          Abbrechen
         </Button>
         <Button variant="danger" onClick={handleConfirmImage}>
-          Confirm
+          Löschen
         </Button>
       </Modal.Footer>
     </Modal>

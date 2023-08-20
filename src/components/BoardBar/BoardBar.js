@@ -3,7 +3,7 @@ import "./BoardBar.scss";
 const BoardBar = () => {
   return (
     <>
-      <nav className="navbar-board">Board bar</nav>
+      <nav className="navbar-kanbaflexboard">Mein KanbaFlex-kanbaflexboard</nav>
     </>
   );
 };

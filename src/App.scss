@@ -11,11 +11,11 @@ body {
   font-size: 14px;
 }
 
-.trello-master {
+.Kanbaflex-master {
   height: 100vh;
   display: grid;
-  grid-template-rows: 40px 50px 1fr;
-  background-color: $board-bg-color;
+  grid-template-rows: 48px 56px 1fr;
+  background: $kanbaflexboard-bg-color;
   color: $app-main-color;
   
   .icon {
@@ -23,9 +23,10 @@ body {
     margin-right: 3px;
   }
 
-  .customize-input-column {
+  .customize-input-board {
     border: none;
     cursor: pointer;
+    font-weight: bold;
 
     &:focus {
       outline: none !important;

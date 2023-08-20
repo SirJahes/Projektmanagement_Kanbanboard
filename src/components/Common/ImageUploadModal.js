@@ -21,17 +21,17 @@ const ImageUploadModal = ({ show, onClose, onImageUpload }) => {
   return (
     <Modal show={show} onHide={onClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Upload Image</Modal.Title>
+        <Modal.Title>Cover-Bild hochladen</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <input type="file" accept="image/*" onChange={handleImageChange} />
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>
-          Close
+          Abbrechen
         </Button>
-        <Button variant="primary" onClick={handleUpload}>
-          Upload
+        <Button variant="success" onClick={handleUpload}>
+          Hochladen
         </Button>
       </Modal.Footer>
     </Modal>

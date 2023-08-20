@@ -4,33 +4,33 @@ import Button from "react-bootstrap/Button";
 import parse from 'html-react-parser';
 import { MODAL_ACTION_CLOSE, MODAL_ACTION_CONFIRM } from "../../utilities/constant";
 
-const ConfirmModalCards = (props) => {
+const ConfirmModalcards = (props) => {
   const { title, content, show, onAction } = props;
 
-  const handleConfirmCards = () => {
+  const handleConfirmcards = () => {
     onAction(MODAL_ACTION_CONFIRM);
   };
 
-  const handleCloseCards = () => {
+  const handleClosecards = () => {
     onAction(MODAL_ACTION_CLOSE);
   };
 
   return (
-    <Modal show={show} onHide={handleCloseCards} backdrop={"static"}>
+    <Modal show={show} onHide={handleClosecards} backdrop={"static"}>
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{parse(content)}</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseCards}>
-          Cancel
+        <Button variant="secondary" onClick={handleClosecards}>
+          Abbrechen
         </Button>
-        <Button variant="danger" onClick={handleConfirmCards}>
-          Confirm
+        <Button variant="danger" onClick={handleConfirmcards}>
+          Löschen
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default ConfirmModalCards;
+export default ConfirmModalcards;

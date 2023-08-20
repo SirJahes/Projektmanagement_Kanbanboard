@@ -1,10 +1,11 @@
 @import '../../settings';
 
-.column {
+.board {
     flex: 0 0 auto;
-    width: 300px;
+    width: 272px;
     // height: calc(100% - #{$gap});
-    height: calc(100vh - 40px - 50px - #{$gap});
+    height: calc(100vh - 48px - 56px - 2*#{$gap});
+    
     
     // &:not(:first-child) {
     //   margin-left: $gap;
@@ -13,38 +14,45 @@
 
     >* {
       background-color: $list-bg-color;
-      color: #333;
+      color: $app-main-color;
       padding: 0 8px;
     }
 
     header {
       padding-left: 15px;
-      height: $column-header-height;
-      // line-height: $column-header-height;
+      height: $board-header-height;
+      // line-height: $board-header-height;
       font-size: 16px;
       font-weight: bold;
-      border-top-left-radius: $column-border-radius;
-      border-top-right-radius: $column-border-radius;
+      border-top-left-radius: $board-border-radius;
+      border-top-right-radius: $board-border-radius;
+      color: redx !important;
       cursor: pointer;
+
+      .form-control-sm {
+        color: $app-main-color;
+      }
     }
 
-    .column-drag-handle {
+    .board-drag-handle {
       display: flex;
       padding-right: 3px;
       padding-top: 5px;
       padding-left: 7px;
 
-      .column-title {
+      .board-title {
         width: 90%;
       }
 
-      .column-dropdown {
+      .board-dropdown {
         width: 10%;
 
         .dropdown-toggle {
           padding: 2px 7px;
 
           &::after {
+            font-size: 15px;
+            font-weight: bold;
             content: '...';
             border: none !important;
             outline: none !important;
@@ -58,6 +66,12 @@
           &:focus {
             outline: none !important;
             box-shadow: none !important;
+          }
+        }
+
+        .dropdown-item {
+          &:hover {
+            background-color: #b9b9b9;
           }
         }
       }
@@ -74,17 +88,20 @@
           font-size: 30px;
           padding-left: 10px;
           cursor: pointer;
-          color: #b3b3b3;
+
+          &:hover {
+            color: red;
+          }
         }
       }
     }
 
     footer {
       padding-left: 10px;
-      height: $column-footer-height;
-      line-height: $column-footer-height;
-      border-bottom-left-radius: $column-border-radius;
-      border-bottom-right-radius: $column-border-radius;
+      height: $board-footer-height;
+      line-height: $board-footer-height;
+      border-bottom-left-radius: $board-border-radius;
+      border-bottom-right-radius: $board-border-radius;
       color:#888;
 
       .footer-action {
@@ -92,7 +109,7 @@
         cursor: pointer;
 
         &:hover {
-          color:#333;
+          color:$app-main-color;
         }
       }
     }
@@ -100,7 +117,7 @@
     div.card-list {
         list-style: none;
         margin: 0;
-        max-height: calc(100% - #{$column-header-height} - #{$column-footer-height});
+        max-height: calc(100% - #{$board-header-height} - #{$board-footer-height});
         overflow-y: auto;
     
         &::-webkit-scrollbar {
@@ -134,9 +151,9 @@
         }
 
         .card-drop-preview {
-          background-color: rgba(150, 150, 200, 0.1);
-          border: 1px dashed #abc;
-          margin: 5px;
+          background-color: rgba(150, 150, 200, 0.3);
+          margin: 0px 0 8px 0;
+          border-radius: $card-border-radius;
         }
     }
   }

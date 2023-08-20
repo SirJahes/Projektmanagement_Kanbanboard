@@ -1,8 +1,8 @@
 @import '../../settings';
 
-.board-columns {
+.kanbaflexboard-boards {
     display: flex;
-    margin: 0 $gap 5px 0;
+    margin: $gap 0 5px 0;
     overflow-x: auto;
     overflow-y: hidden;
 
@@ -20,30 +20,42 @@
       border-radius: 5px solid $list-bg-color;
     }
 
-    .column-drop-preview {
-      background-color: rgba(150, 150, 200, 0.1);
-      border: 1px dashed #abc;
-      margin: 5px 45px 5px 5px;
+    .board-drop-preview {
+      background-color: rgba(23, 43, 77, 0.2);
+      margin: 0 0 0 10px;
+      height: 500p;
+      border-radius: $card-border-radius;
     }
 
-    .add-new-column {
-      width: 250px;
-      height: 40px;
-      line-height: 32px;
+    .add-new-board {
+      display: flex;
+      width: 272px;
+      height: 48px;
+      align-items: center;
       padding: 4px 0 4px 15px;
       cursor: pointer;
       color: white;
       margin-left: $gap;
       font-size: 15px;
       background-color: hsla(0, 0, 100, .24);
-      border-radius: $column-border-radius;
+      border-radius: $board-border-radius;
 
       &:hover {
         background-color: hsla(0, 0, 100, .34);
       }
+
+      .group-btn {
+        i {
+          color: #b3b3b3;
+
+          &:hover {
+            color: red;
+          }
+        }
+      }
     }
 
-    .content-add-column {
+    .content-add-board {
       width: 250px;
       height: fit-content;
       padding: 10px;
@@ -60,6 +72,10 @@
           font-size: 30px;
           padding-left: 10px;
           cursor: pointer;
+
+          &:hover {
+            color: red;
+          }
         }
       }
 

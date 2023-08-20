@@ -1,17 +1,14 @@
-$board-bg-color       : #0079bf;
-$navbar-app-bg-color  : #0067a3;
-$navbar-board-bg-color: #0067a3;
-$list-bg-color        : #ebecf0;
-$app-main-color       : #333;
-$gap                  : 10px;
-$column-header-height : 45px;
-$column-footer-height : 36px;
-$column-border-radius : 5px;
-$card-border-radius   : 3px;
-
-//Screen
-$screen-lg      : 1201px;
-$screen-md      : 992px;
-$screen-sm      : 768px;
-$screen-phone   : 480px;
-$screen-ip6-down: '(max-width: 375px';
+$gradient-start-color          : #1C83D8;
+$gradient-end-color            : #37B3C4;
+$gradient-direction            : to bottom;
+$kanbaflexboard-bg-color       : linear-gradient($gradient-direction, $gradient-start-color, $gradient-end-color);
+$navbar-app-bg-color           : #08479E;
+$navbar-kanbaflexboard-bg-color: #125EA7;
+$list-bg-color                 : #ebecf0;
+$app-main-color                : #172b4d;
+$gap                           : 12px;
+$card-gap                      : 8px;
+$board-header-height           : 48px;
+$board-footer-height           : 44px;
+$board-border-radius           : 12px;
+$card-border-radius            : 10px;

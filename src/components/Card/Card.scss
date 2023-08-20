@@ -5,10 +5,11 @@
       background-color: white;
       padding: $gap;
       border-radius: $card-border-radius;
-      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 1px rgba(23, 43, 77, 0.3);
+      border: 1px solid #c4cbe6;
       cursor: pointer;
       
-      margin-bottom: $gap;
+      margin-bottom: $card-gap;
 
       img {
         display: block;
